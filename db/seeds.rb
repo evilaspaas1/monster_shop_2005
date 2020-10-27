@@ -23,6 +23,16 @@ fred = User.create(name: "Fred Savage",
                    password: "test",
                    role: 0)
 
+#merchant employee
+roz = bike_shop.users.create(name: "Roz Peterson",
+                   address: "Monster Inc.",
+                   city: "Monster Town",
+                   state: "Monster State",
+                   zip: '80000',
+                   email: "fright@gmail.com",
+                   password: "test",
+                   role: 1)
+
 #admins
 tim = User.create(name: "Tim",
                    address: "Ya Hate To See It Dr.",
@@ -31,7 +41,7 @@ tim = User.create(name: "Tim",
                    zip: '80205',
                    email: "tim@gmail.com",
                    password: "test",
-                   role: 1)
+                   role: 2)
 
 #bike_shop items
 tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
