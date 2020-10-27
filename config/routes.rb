@@ -37,5 +37,6 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
 
   get "/register", to: "users#new"
-  post "/register", to: "users#create"
+  # post "/register", to: "users#create"
+  get "/profile", to: "users#show"
 end
