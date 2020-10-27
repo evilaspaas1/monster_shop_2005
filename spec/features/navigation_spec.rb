@@ -31,7 +31,26 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         expect(page).to have_content("Cart: 0")
       end
+    end
+    it "I can see a link returning to the home page" do
 
+      visit '/merchants'
+
+      within 'nav' do
+        expect(page).to have_content("Home")
+      end
+    end
+    it "I can see all Links required in nav" do
+      visit root_path
+
+      within 'nav' do
+        expect(page).to have_link("Log In")
+        expect(page).to have_link("All Merchants")
+        expect(page).to have_link("All Items")
+        expect(page).to have_link("Cart: 0")
+        expect(page).to have_link("Register")
+        expect(page).to have_link("Home")
+      end
     end
   end
 end
