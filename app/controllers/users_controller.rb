@@ -4,10 +4,15 @@ class UsersController<ApplicationController
   end
   
   def create 
-    user = User.create(user_params)
-    session[:user_id] = user.id
-    flash[:logged_in] = "You have successfully registered and logged in."
-    redirect_to '/profile'
+    user = User.new(user_params)
+    if user.save
+      session[:user_id] = user.id
+      flash[:logged_in] = "You have successfully registered and logged in."
+      redirect_to '/profile'
+    else 
+      flash[:invalid_information] = user.errors.full_messages.uniq.to_sentence
+      render :new
+    end 
   end
 
   def show
