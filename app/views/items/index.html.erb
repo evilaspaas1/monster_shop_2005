@@ -25,4 +25,9 @@
 </section>
 
 <h2>Item Statistics</h2>
-<% @items.top_5_items %>
+<h2>Top 5 Best Sellers:</h2>
+<ol>
+  <% @items.top_5_items.each do |item| %>
+    <li><%= item.name %>: Quantity Bought: <%= item.item_orders.first.quantity %></li>
+  <% end %>
+</ol>
