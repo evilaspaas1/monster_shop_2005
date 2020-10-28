@@ -78,5 +78,31 @@ describe "as a visitor" do
      expect(current_path).to eq("/admin")
      expect(page).to have_content("Logged in as #{tim.name}")
     end
+
+    it "Will display a flash message if i try and login with wrong info" do
+      fred = User.create(name: "Fred Savage",
+                         address: "666 Devil Ave",
+                         city: "Mesatown",
+                         state: "AZ",
+                         zip: '80085',
+                         email: "rando@gmail.com",
+                         password: "test",
+                         role: 0)
+
+      visit root_path
+
+      within "nav" do
+        click_link "Log In"
+      end
+
+      expect(current_path).to eq("/login")
+
+      fill_in :email, with: "funbucket13@gmail.com"
+      fill_in :password, with: fred.password
+      click_button "Log In"
+
+      expect(current_path).to eq("/login")
+      expect(page).to have_content("Either email or password were incorrect")
+    end
   end
 end
