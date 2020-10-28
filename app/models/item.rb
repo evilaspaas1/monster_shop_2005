@@ -28,6 +28,13 @@ class Item <ApplicationRecord
   def self.active_items
     where(active?: true)
   end
+
+  def self.top_5_items
+    joins(:item_orders)
+    require 'pry'; binding.pry
+    item_orders.order(:quantity)
+  end
+  
   
 
 end
