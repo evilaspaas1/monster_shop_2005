@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     get "/", to: 'dashboard#show'
   end
 
+  namespace :admin do
+    get '/', to: 'dashboard#show'
+    get '/users', to: 'dashboard#users_index'
+  end
+
   get "/merchants", to: "merchants#index"
   get "/merchants/new", to: "merchants#new"
   get "/merchants/:id", to: "merchants#show"
