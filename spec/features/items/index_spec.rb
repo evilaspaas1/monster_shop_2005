@@ -10,6 +10,7 @@ RSpec.describe "Items Index Page" do
 
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+      @dog_chew_toy = @brian.items.create(name: "Dog Chew Toy", description: "They'll really love it!", price: 22, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 23)
     end
 
     it "all items or merchant names are links" do
@@ -19,11 +20,11 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_link(@tire.merchant.name)
       expect(page).to have_link(@pull_toy.name)
       expect(page).to have_link(@pull_toy.merchant.name)
-      expect(page).to have_link(@dog_bone.name)
+      expect(page).to_not have_link(@dog_bone.name)
       expect(page).to have_link(@dog_bone.merchant.name)
     end
 
-    it "I can see a list of all of the items "do
+    it "I can see a list of all of the items" do
 
       visit '/items'
 
@@ -47,15 +48,16 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_css("img[src*='#{@pull_toy.image}']")
       end
 
-      within "#item-#{@dog_bone.id}" do
-        expect(page).to have_link(@dog_bone.name)
-        expect(page).to have_content(@dog_bone.description)
-        expect(page).to have_content("Price: $#{@dog_bone.price}")
-        expect(page).to have_content("Inactive")
-        expect(page).to have_content("Inventory: #{@dog_bone.inventory}")
-        expect(page).to have_link(@brian.name)
-        expect(page).to have_css("img[src*='#{@dog_bone.image}']")
-      end
+      expect(page).to_not have_css("#item-#{@dog_bone.id}")
+  
+    end
+    it 'I can only see items that are not disabled' do
+
+      visit '/items'
+
+      expect(page).to_not have_content("#{@dog_chew_toy.name}")
+      expect(page).to_not have_content("#{@dog_chew_toy.description}")
+      expect(page).to_not have_content("#{@dog_chew_toy.price}")
     end
   end
 end
