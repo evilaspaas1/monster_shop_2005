@@ -52,5 +52,19 @@ RSpec.describe 'Site Navigation' do
         expect(page).to have_link("Home")
       end
     end
+
+    it "When I try to access any path '/merchant, /admin, /profile' I then see a 404 error" do
+      visit '/merchant'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit '/admin'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit '/profile'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
   end
 end

@@ -3,6 +3,15 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  namespace :merchant do
+    get "/", to: 'dashboard#show'
+  end
+
+  namespace :admin do
+    get '/', to: 'dashboard#show'
+    get '/users', to: 'dashboard#users_index'
+  end
+
   get "/merchants", to: "merchants#index"
   get "/merchants/new", to: "merchants#new"
   get "/merchants/:id", to: "merchants#show"
@@ -40,4 +49,5 @@ Rails.application.routes.draw do
 
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
+  delete '/logout', to: 'sessions#reset'
 end
