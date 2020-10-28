@@ -54,7 +54,7 @@ describe "As a user" do
       click_link ("Log Out")
     end
     expect(current_path).to eq(root_path)
-    expect(page).to have_content("Good Bye")
+    expect(page).to have_content("You have logged out")
 
     within 'nav' do
       expect(page).to_not have_link("Log In")
@@ -136,7 +136,7 @@ describe 'As a merchant employee' do
       click_link ("Log Out")
     end
     expect(current_path).to eq(root_path)
-    expect(page).to have_content("Good Bye")
+    expect(page).to have_content("You have logged out")
 
     within 'nav' do
       expect(page).to_not have_link("Log In")
@@ -225,7 +225,7 @@ describe 'As a merchant employee' do
         click_link ("Log Out")
       end
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Good Bye")
+      expect(page).to have_content("You have logged out")
 
       within 'nav' do
         expect(page).to_not have_link("Log In")
