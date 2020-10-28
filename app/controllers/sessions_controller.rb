@@ -10,6 +10,9 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       # flash[:login] = "Logged in as #{current_user.name}"
       redirect_user
+    else
+      flash[:error] = "Either email or password were incorrect"
+      redirect_to "/login"
     end
   end
 
