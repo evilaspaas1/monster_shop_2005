@@ -30,9 +30,8 @@ class Item <ApplicationRecord
   end
 
   def self.top_5_items
-    joins(:item_orders)
-    require 'pry'; binding.pry
-    item_orders.order(:quantity)
+    self.joins(:orders).order(quantity: :desc).limit(5)
+    # require 'pry'; binding.pry
   end
   
   
