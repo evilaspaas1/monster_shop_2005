@@ -17,10 +17,23 @@ describe Item, type: :model do
     it {should have_many(:orders).through(:item_orders)}
   end
 
+  describe "class methods" do
+    before(:each) do
+      @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      @chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
+      @bike_horn = @bike_shop.items.create(name: "Bike Horn", description: "It'll never stop squeaking!", price: 40, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", active?:false, inventory: 5)
+    end 
+    it '::active items' do
+      active_item_collection = Item.active_items
+      expect(active_item_collection).to eq([@chain])
+    end
+  end
+  
   describe "instance methods" do
     before(:each) do
       @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
+      @bike_horn = @bike_shop.items.create(name: "Bike Horn", description: "It'll never stop squeaking!", price: 40, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", active?:false, inventory: 5)
 
       @review_1 = @chain.reviews.create(title: "Great place!", content: "They have great bike stuff and I'd recommend them to anyone.", rating: 5)
       @review_2 = @chain.reviews.create(title: "Cool shop!", content: "They have cool bike stuff and I'd recommend them to anyone.", rating: 4)
