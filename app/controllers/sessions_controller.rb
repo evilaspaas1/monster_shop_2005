@@ -1,21 +1,26 @@
 class SessionsController < ApplicationController
 
   def new
-
+    if session[:user_id] != nil
+      flash[:notice] = "You are already logged in!"
+      redirect_user
+    end
   end
 
   def create
     user = User.find_by(email: params[:email])
     if user != nil && user.authenticate(params[:password])
       session[:user_id] = user.id
-      # flash[:login] = "Logged in as #{current_user.name}"
       redirect_user
+    else
+      flash[:error] = "Either email or password were incorrect"
+      redirect_to "/login"
     end
   end
 
   def destroy
     reset_session
-    flash[:notice] = "Good Bye"
+    flash[:notice] = "You have logged out"
     redirect_to root_path
   end
 

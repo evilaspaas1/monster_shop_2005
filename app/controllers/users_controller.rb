@@ -28,7 +28,8 @@ class UsersController<ApplicationController
       :state,
       :zip,
       :email,
-      :password
+      :password,
+      :password_confirmation
     )
   end
 

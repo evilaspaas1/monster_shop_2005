@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "As a visitor" do 
+RSpec.describe "As a visitor" do
   describe "When I visit the user registration page" do
     it 'I can register as a user with details' do
       visit '/items'
 
-      within ".topnav" do 
+      within ".topnav" do
         click_link "Register"
       end
 
@@ -28,7 +28,7 @@ RSpec.describe "As a visitor" do
     it 'I am returned to the registration page if information is not all filled in' do
       visit '/items'
 
-      within ".topnav" do 
+      within ".topnav" do
         click_link "Register"
       end
 
@@ -39,12 +39,32 @@ RSpec.describe "As a visitor" do
       fill_in :zip, with:("")
       fill_in :email, with:("msully@monster.inc")
       fill_in :password, with:("m$ully")
-      fill_in :password_confirmation, with:("m$ully")
+      fill_in :password_confirmation, with:("test")
 
       click_button('Create Profile')
 
       expect(current_path).to_not eq("/profile")
-      expect(page).to have_content("Zip can't be blank") 
+      expect(page).to have_content("Zip can't be blank")
+    end
+    it 'I am returned to the registration page if password_confirmation does not match password' do
+      visit '/items'
+
+      within ".topnav" do
+        click_link "Register"
+      end
+
+      fill_in :name, with:("Mike Sully")
+      fill_in :address, with:("123 Fake St")
+      fill_in :city, with:("Denver")
+      fill_in :state, with:("CO")
+      fill_in :zip, with:("12345")
+      fill_in :email, with:("msully@monster.inc")
+      fill_in :password, with:("m$ully")
+      fill_in :password_confirmation, with:("test")
+
+      click_button('Create Profile')
+
+      expect(page).to have_content("Password confirmation doesn't match Password")
     end
     it 'And I fill in an email that is not unique, I am returned to the registration page' do
 
@@ -52,7 +72,7 @@ RSpec.describe "As a visitor" do
         name: "Cactus",
         address: "1234 Real St",
         city: "Denver",
-        state: "CO", 
+        state: "CO",
         zip: "80000",
         email: "succulent_cactus@hotmail.com",
         password: "C@ctu$"
@@ -60,7 +80,7 @@ RSpec.describe "As a visitor" do
 
       visit '/items'
 
-      within ".topnav" do 
+      within ".topnav" do
         click_link "Register"
       end
 
@@ -83,5 +103,5 @@ RSpec.describe "As a visitor" do
       expect(page).to have_field('Zip', with: '80001')
     end
   end
-  
+
 end
