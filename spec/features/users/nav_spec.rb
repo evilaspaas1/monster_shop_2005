@@ -23,5 +23,36 @@ describe "As a user" do
       expect(page).to have_link("Log Out")
       expect(page).to have_link("Profile")
     end
+
+    within 'nav' do
+      click_link ("All Merchants")
+    end
+    expect(current_path).to eq('/merchants')
+
+    within 'nav' do
+      click_link ("All Items")
+    end
+    expect(current_path).to eq('/items')
+
+    within 'nav' do
+      click_link ("Home")
+    end
+    expect(current_path).to eq('/')
+
+    within 'nav' do
+      click_link ("Profile")
+    end
+    expect(current_path).to eq('/profile')
+
+    within 'nav' do
+      click_link ("Cart: 0")
+    end
+    expect(current_path).to eq('/cart')
+
+    within 'nav' do
+      click_link ("Log Out")
+    end
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("Good Bye")
   end
 end

@@ -40,4 +40,5 @@ Rails.application.routes.draw do
 
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
+  delete '/logout', to: 'sessions#reset'
 end
