@@ -22,6 +22,7 @@ describe "As a user" do
       expect(page).to have_link("Home")
       expect(page).to have_link("Log Out")
       expect(page).to have_link("Profile")
+      expect(page).to have_content("Logged in as #{fred.name}")
     end
 
     within 'nav' do
@@ -54,5 +55,10 @@ describe "As a user" do
     end
     expect(current_path).to eq(root_path)
     expect(page).to have_content("Good Bye")
+
+    within 'nav' do
+      expect(page).to_not have_link("Log In")
+      expect(page).to_not have_link("Register")
+    end
   end
 end
