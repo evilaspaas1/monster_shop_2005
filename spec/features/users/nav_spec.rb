@@ -233,5 +233,24 @@ describe 'As a merchant employee' do
         expect(page).to_not have_link("Cart: 0")
       end
     end
+
+    it "When i try to access any path with '/merchant, /cart' I see a 404 error" do
+      fred = User.create(name: "Fred Savage",
+                         address: "666 Devil Ave",
+                         city: "Mesatown",
+                         state: "AZ",
+                         zip: '80085',
+                         email: "rando@gmail.com",
+                         password: "test",
+                         role: 2)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(fred)
+
+      visit '/merchant'
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit '/cart'
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
   end
 end
