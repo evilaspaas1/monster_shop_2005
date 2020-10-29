@@ -1,2 +1,10 @@
 <h1>User Information<h1>
 
+  <p><%= current_user.name %></p>
+  <p><%= current_user.address %></p>
+  <p><%= current_user.city %></p>
+  <p><%= current_user.state %></p>
+  <p><%= current_user.zip %></p>
+  <p><%= current_user.email %></p>
+
+<%= link_to "Edit Profile Information", "/profile/edit" %>

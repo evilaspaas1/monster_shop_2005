@@ -16,6 +16,8 @@ class UsersController<ApplicationController
   end
 
   def show
+    # @user = current_user
+    # @user = User.find(params[:id])
     render file: '/public/404' unless current_user
   end
 
