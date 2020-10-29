@@ -26,8 +26,16 @@
 
 <h2>Item Statistics</h2>
 <h2>Top 5 Best Sellers:</h2>
-<ol>
+<ol id="best-5">
   <% @items.top_5_items.each do |item| %>
-    <li><%= item.name %>: Quantity Bought: <%= item.item_orders.first.quantity %></li>
+  <li><%= item.name %>: Quantity Bought: <%= item.item_orders.first.quantity %></li>
+  <% end %>
+</ol>
+
+<h2>Top 5 Worst Sellers:</h2>
+
+<ol id="worst-5">
+  <% @items.bottom_5_items.each do |item| %>
+  <li><%= item.name %>: Quantity Bought: <%= item.item_orders.first.quantity %></li>
   <% end %>
 </ol>
