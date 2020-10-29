@@ -23,7 +23,6 @@ RSpec.describe "As a registered user" do
       click_button "Log In"
     end
     it 'I see all of my information except my password' do
-      save_and_open_page
       expect(page).to have_content("Fred Savage")
       expect(page).to have_content("666 Devil Ave")
       expect(page).to have_content("Mesatown")
