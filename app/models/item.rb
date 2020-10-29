@@ -25,4 +25,15 @@ class Item <ApplicationRecord
     item_orders.empty?
   end
 
+  def self.active_items
+    where(active?: true)
+  end
+
+  def self.top_5_items
+    self.joins(:orders).order(quantity: :desc).limit(5)
+  end
+
+  def self.bottom_5_items
+    self.joins(:orders).order(:quantity).limit(5)
+  end
 end

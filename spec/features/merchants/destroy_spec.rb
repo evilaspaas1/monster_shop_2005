@@ -35,7 +35,25 @@ RSpec.describe "As a visitor" do
       pencil = mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
       pulltoy = brian.items.create(name: "Pulltoy", description: "It'll never fall apart!", price: 14, image: "https://www.valupets.com/media/catalog/product/cache/1/image/650x/040ec09b1e35df139433887a97daa66f/l/a/large_rubber_dog_pull_toy.jpg", inventory: 7)
 
+      @fred = User.create(name: "Fred Savage",
+                   address: "666 Devil Ave",
+                   city: "Mesatown",
+                   state: "AZ",
+                   zip: '80085',
+                   email: "rando@gmail.com",
+                   password: "test",
+                   role: 0)
+                   
+      visit root_path
 
+      within "nav" do
+        click_link "Log In"
+      end
+
+      fill_in :email, with: "rando@gmail.com"
+      fill_in :password, with: @fred.password
+      click_button "Log In"
+      
       visit "/items/#{paper.id}"
       click_on "Add To Cart"
       visit "/items/#{paper.id}"

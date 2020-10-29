@@ -24,6 +24,25 @@ RSpec.describe("Order Creation") do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
 
+      @fred = User.create(name: "Fred Savage",
+                   address: "666 Devil Ave",
+                   city: "Mesatown",
+                   state: "AZ",
+                   zip: '80085',
+                   email: "rando@gmail.com",
+                   password: "test",
+                   role: 0)
+
+      visit root_path
+
+      within "nav" do
+        click_link "Log In"
+      end
+
+      fill_in :email, with: "rando@gmail.com"
+      fill_in :password, with: @fred.password
+      click_button "Log In"
+
       visit "/cart"
       click_on "Checkout"
     end
@@ -42,7 +61,7 @@ RSpec.describe("Order Creation") do
       fill_in :zip, with: zip
 
       click_button "Create Order"
-
+      
       new_order = Order.last
 
       expect(current_path).to eq("/orders/#{new_order.id}")
