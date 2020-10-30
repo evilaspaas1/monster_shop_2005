@@ -20,7 +20,7 @@ class UsersController<ApplicationController
   end
 
   def edit
-    current_user
+
   end
 
   def update
@@ -34,7 +34,7 @@ class UsersController<ApplicationController
   end
 
   def edit_password
-    current_user
+    
   end
 
   def update_password
