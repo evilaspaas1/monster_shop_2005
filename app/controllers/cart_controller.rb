@@ -16,6 +16,12 @@ class CartController < ApplicationController
     end
   end
 
+  def sub_quantity
+    item = Item.find(params[:item_id])
+    cart.sub_item(item.id.to_s)
+    redirect_to '/cart'
+  end
+
   def show
     if current_admin?
       render file: '/public/404'
