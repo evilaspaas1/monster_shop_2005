@@ -19,13 +19,41 @@ RSpec.describe 'Cart show' do
     end
 
     it 'Theres a link to checkout' do
+      @fred = User.create(name: "Fred Savage",
+                   address: "666 Devil Ave",
+                   city: "Mesatown",
+                   state: "AZ",
+                   zip: '80085',
+                   email: "rando@gmail.com",
+                   password: "test",
+                   role: 0)
+
+      visit root_path
+
+      within "nav" do
+        click_link "Log In"
+      end
+
+      fill_in :email, with: "rando@gmail.com"
+      fill_in :password, with: @fred.password
+      click_button "Log In"
+
       visit "/cart"
 
       expect(page).to have_link("Checkout")
-
       click_on "Checkout"
 
       expect(current_path).to eq("/orders/new")
+    end
+
+    describe 'As a visitor' do
+      it "i see information telling me i must register or log in to finish the checkout process" do
+        visit "/cart"
+
+        expect(page).to have_content("You must register or log in to checkout")
+        expect(page).to have_link("register")
+        expect(page).to have_link("log in")
+      end
     end
   end
 

@@ -15,6 +15,25 @@ RSpec.describe("New Order Page") do
       click_on "Add To Cart"
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
+
+      @fred = User.create(name: "Fred Savage",
+                   address: "666 Devil Ave",
+                   city: "Mesatown",
+                   state: "AZ",
+                   zip: '80085',
+                   email: "rando@gmail.com",
+                   password: "test",
+                   role: 0)
+
+      visit root_path
+
+      within "nav" do
+        click_link "Log In"
+      end
+
+      fill_in :email, with: "rando@gmail.com"
+      fill_in :password, with: @fred.password
+      click_button "Log In"
     end
     it "I see all the information about my current cart" do
       visit "/cart"
