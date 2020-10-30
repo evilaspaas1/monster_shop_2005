@@ -32,5 +32,41 @@ RSpec.describe 'Cart creation' do
         expect(page).to have_content("Cart: 2")
       end
     end
+    it "There is a button/ link to increment the count of items" do
+      visit "/items/#{@paper.id}"
+      click_button("Add To Cart")
+
+      visit '/cart'
+
+      expect(page).to have_content(@paper.name)
+#starting total 25
+      within ".cart-items" do
+        within "#cart-item-#{@paper.id}" do
+          expect(page).to have_content(1)
+          expect(page).to have_link("+")
+          click_link "+"
+          binding.pry
+          expect(page).to have_content(2)
+        end
+      end
+    end
+    it "Can't add more items than in stock" do
+      paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 1)
+      visit "/items/#{paper.id}"
+
+      click_button("Add To Cart")
+      visit '/cart'
+
+      expect(page).to have_content(paper.name)
+      within ".cart-items" do
+        within "#cart-item-#{paper.id}" do
+          expect(page).to have_content(1)
+          click_link "+"
+          expect(page).to have_content(1)
+          click_link "+"
+          expect(page).to have_content(1)
+        end
+      end
+    end
   end
 end
