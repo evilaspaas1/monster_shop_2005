@@ -38,15 +38,23 @@ RSpec.describe 'Cart creation' do
 
       visit '/cart'
 
+      #starting total 25
       expect(page).to have_content(@paper.name)
-#starting total 25
       within ".cart-items" do
         within "#cart-item-#{@paper.id}" do
           expect(page).to have_content(1)
           expect(page).to have_link("+")
           click_link "+"
-          binding.pry
           expect(page).to have_content(2)
+        end
+      end
+
+      within ".cart-items" do
+        within "#cart-item-#{@paper.id}" do
+          expect(page).to have_content(2)
+          expect(page).to have_link("-")
+          click_link "-"
+          expect(page).to have_content(1)
         end
       end
     end
