@@ -68,5 +68,45 @@ describe 'As a registered user' do
       click_button "Submit"
       expect(page).to have_content("City can't be blank")
     end
+
+    it 'Has link to edit password' do
+      visit '/profile/'
+
+      click_link('Edit Password')
+
+      expect(current_path).to eq('/profile/edit_password')
+    end
+
+    it "Has a form to edit the password" do
+      visit '/profile/edit_password'
+
+      expect(page).to have_field('password')
+      expect(page).to have_field('password_confirmation')
+      expect(page).to have_button("Submit")
+    end
+
+    it "When i fill in the password and password confirmation and
+    submit it i am taken back to my profile page with a flash message" do
+      visit '/profile/edit_password'
+
+      fill_in 'password', with: 'testing'
+      fill_in 'password_confirmation', with: 'testing'
+
+      click_button "Submit"
+
+      expect(current_path).to eq('/profile')
+      expect(page).to have_content("Password has been updated")
+    end
+
+    it "When password and password_confirmation dont match i get a flash message" do
+      visit '/profile/edit_password'
+
+      fill_in 'password', with: 'testing'
+      fill_in 'password_confirmation', with: 'test'
+
+      click_button "Submit"
+      
+      expect(page).to have_content("Password confirmation doesn't match Password")
+    end
   end
 end
