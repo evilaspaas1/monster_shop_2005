@@ -76,5 +76,26 @@ RSpec.describe 'Cart creation' do
         end
       end
     end
+    it "Removes item from cart if we decriment count to 0" do
+      paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 1)
+      visit "/items/#{paper.id}"
+
+      click_button("Add To Cart")
+      visit '/cart'
+
+      within ".cart-items" do
+        within "#cart-item-#{paper.id}" do
+          expect(page).to have_content(1)
+          expect(page).to have_link("-")
+          click_link "-"
+          save_and_open_page
+        end
+      end
+      within "nav" do
+        expect(page).to have_content("Cart: 0")
+      end
+      expect(page).to_not have_css("cart-item-#{paper.id}")
+      expect(page).to have_content("Cart is currently empty")
+    end
   end
 end
