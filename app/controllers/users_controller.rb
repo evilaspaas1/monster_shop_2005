@@ -16,9 +16,21 @@ class UsersController<ApplicationController
   end
 
   def show
-    # @user = current_user
-    # @user = User.find(params[:id])
     render file: '/public/404' unless current_user
+  end
+
+  def edit
+
+  end
+
+  def update
+    if current_user.update(user_params)
+      flash[:update] = 'Data has been updated'
+      redirect_to('/profile')
+    else
+      flash[:invalid_information] = @user.errors.full_messages.uniq.to_sentence
+      render :edit
+    end
   end
 
   private
