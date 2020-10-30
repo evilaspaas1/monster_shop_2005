@@ -19,6 +19,34 @@ class UsersController<ApplicationController
     render file: '/public/404' unless current_user
   end
 
+  def edit
+
+  end
+
+  def update
+    if current_user.update(user_params)
+      flash[:update] = 'Data has been updated'
+      redirect_to('/profile')
+    else
+      flash[:invalid_information] = @user.errors.full_messages.uniq.to_sentence
+      render :edit
+    end
+  end
+
+  def edit_password
+    
+  end
+
+  def update_password
+    if current_user.update(user_params)
+      flash[:password_update] = 'Password has been updated'
+      redirect_to('/profile')
+    else
+      flash[:invalid_information] = @user.errors.full_messages.uniq.to_sentence
+      render :edit_password
+    end
+  end
+
   private
   def user_params
     params.permit(
