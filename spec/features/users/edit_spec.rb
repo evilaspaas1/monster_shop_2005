@@ -69,6 +69,26 @@ describe 'As a registered user' do
       expect(page).to have_content("City can't be blank")
     end
 
+    it "When i change my email and its already taken i get a flash message
+    and sent back to the edit page" do
+      @mike = User.create(name: "Mike dao",
+                   address: "666 Devil Ave",
+                   city: "Mesatown",
+                   state: "AZ",
+                   zip: '80085',
+                   email: "mike@gmail.com",
+                   password: "test",
+                   role: 0)
+
+      visit '/profile/edit'
+
+      fill_in 'email', with: 'mike@gmail.com'
+
+      click_button "Submit"
+      
+      expect(page).to have_content("Email has already been taken")
+    end
+
     it 'Has link to edit password' do
       visit '/profile/'
 
@@ -105,7 +125,7 @@ describe 'As a registered user' do
       fill_in 'password_confirmation', with: 'test'
 
       click_button "Submit"
-      
+
       expect(page).to have_content("Password confirmation doesn't match Password")
     end
   end
