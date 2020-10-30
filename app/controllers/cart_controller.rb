@@ -19,7 +19,11 @@ class CartController < ApplicationController
   def sub_quantity
     item = Item.find(params[:item_id])
     cart.sub_item(item.id.to_s)
-    redirect_to '/cart'
+    if cart.contents[item.id.to_s] == 0
+      remove_item
+    else
+      redirect_to '/cart'
+    end 
   end
 
   def show
