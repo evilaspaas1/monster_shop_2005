@@ -20,7 +20,7 @@ class UsersController<ApplicationController
   end
 
   def edit
-
+    current_user
   end
 
   def update
@@ -30,6 +30,20 @@ class UsersController<ApplicationController
     else
       flash[:invalid_information] = @user.errors.full_messages.uniq.to_sentence
       render :edit
+    end
+  end
+
+  def edit_password
+    current_user
+  end
+
+  def update_password
+    if current_user.update(user_params)
+      flash[:password_update] = 'Password has been updated'
+      redirect_to('/profile')
+    else
+      flash[:invalid_information] = @user.errors.full_messages.uniq.to_sentence
+      render :edit_password
     end
   end
 
