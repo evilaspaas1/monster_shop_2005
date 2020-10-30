@@ -23,7 +23,7 @@ class CartController < ApplicationController
       remove_item
     else
       redirect_to '/cart'
-    end 
+    end
   end
 
   def show
