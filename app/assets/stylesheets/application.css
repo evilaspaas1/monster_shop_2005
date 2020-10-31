@@ -33,6 +33,10 @@ img{
   width: 50%;
 }
 
+.thumbnail{
+  width: 50px;
+}
+
 #cart-image{
   width:50px;
 }
