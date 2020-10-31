@@ -100,7 +100,7 @@ Be careful to watch out for which stories allow full deletion of content, and re
 ## Deploying to Heroku
 
 ```
-[ ] done
+[x] done
 
 User Story 1, Deploy your application to Heroku
 
@@ -128,7 +128,7 @@ You will need to set up some basic routing and empty controller actions and empt
 
 
 ```
-[ ] done
+[x] done
 
 User Story 2, Visitor Navigation
 
@@ -146,7 +146,7 @@ Next to the shopping cart link I see a count of the items in my cart
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 3, User Navigation
 
@@ -163,7 +163,7 @@ I also see text that says "Logged in as Mike Dao" (or whatever my name is)
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 4, Merchant Navigation
 
@@ -174,7 +174,7 @@ Plus the following links:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 5, Admin Navigation
 
@@ -189,7 +189,7 @@ Minus the following links/info
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 6, Visitor Navigation Restrictions
 
@@ -201,7 +201,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 7, User Navigation Restrictions
 
@@ -212,7 +212,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 8, Merchant Navigation Restrictions
 
@@ -222,7 +222,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 9, Admin Navigation Restrictions
 
@@ -239,7 +239,7 @@ This series of stories will allow a user to register on the site.
 
 
 ```
-[ ] done
+[x] done
 
 User Story 10, User Registration
 
@@ -265,7 +265,7 @@ I see a flash message indicating that I am now registered and logged in
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 11, User Registration Missing Details
 
@@ -277,7 +277,7 @@ And I see a flash message indicating that I am missing required fields
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 12, Registration Email must be unique
 
@@ -298,7 +298,7 @@ Our application wouldn't be much use if users could not log in to use it.
 
 
 ```
-[ ] done
+[x] done
 
 User Story 13, User can Login
 
@@ -313,7 +313,7 @@ And I see a flash message that I am logged in
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 14, User cannot log in with bad credentials
 
@@ -326,7 +326,7 @@ I am NOT told whether it was my email or password that was incorrect
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 15, Users who are logged in already are redirected
 
@@ -339,7 +339,7 @@ And I see a flash message that tells me I am already logged in
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 16, User can log out
 
@@ -356,7 +356,7 @@ Any items I had in my shopping cart are deleted
 This is the main "catalog" page of the entire site where users will start their e-commerce experience. Visitors to the site, and regular users, will be able to view an index page of all items available for purchase and some basic statistics. Each item will also have a "show" page where more information is shown.
 
 ```
-[ ] done
+[x] done
 
 User Story 17, Items Index Page
 
@@ -368,7 +368,7 @@ The item image is a link to that item's show page
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 18, Items Index Page Statistics
 
@@ -390,7 +390,7 @@ When a user who is not a merchant nor an admin logs into the system, they are ta
 Admin users can access a namespaced route of "/admin/users" to see an index page  of all non-merchant/non-admin users, and from there see each user. This will allow the admin to perform every action on a user's account that the user themselves can perform. This functionality is taken care of in User Stories 53 & 54.
 
 ```
-[ ] done
+[x] done
 
 User Story 19, User Profile Show Page
 
@@ -401,7 +401,7 @@ And I see a link to edit my profile data
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 20, User Can Edit their Profile Data
 
@@ -419,7 +419,7 @@ And I see my updated information
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 21, User Can Edit their Password
 
@@ -435,7 +435,7 @@ And I see a flash message telling me that my password is updated
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 22, User Editing Profile Data must have unique Email address
 
@@ -456,7 +456,7 @@ This is what this app is all about: how a user can put things in a shopping cart
 Merchant Employees can order items in addition to regular users. Admin can not order items. This should already be taken care of through the navigation restrictions you set in User Stories 5 & 9.
 
 ```
-[ ] done
+[x] done
 
 User Story 23, Adding Item Quantity to Cart
 
@@ -469,7 +469,7 @@ I cannot increment the count beyond the item's inventory size
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 24, Decreasing Item Quantity from Cart
 
@@ -482,7 +482,7 @@ If I decrement the count to 0 the item is immediately removed from my cart
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 25, Visitors must register or log in to check out
 
@@ -495,7 +495,7 @@ The words "log in" is a link to the login page
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 26, Registered users can check out
 
@@ -531,7 +531,7 @@ The show page template for an order can be shared between users, merchants and a
 - Admins can fulfill items on order on behalf of a merchant
 
 ```
-[ ] done
+[x] done
 
 User Story 27, User Profile displays Orders link
 
@@ -543,7 +543,7 @@ When I click this link my URI path is "/profile/orders"
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 28, User Profile displays Orders
 
@@ -559,7 +559,7 @@ I see every order I've made, which includes the following information:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 29, User views an Order Show Page
 
