@@ -8,6 +8,14 @@ class OrdersController <ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def cancel
+    order = Order.find(params[:id])
+    order.cancel_order
+
+    flash[:cancel] = 'Order is now cancelled'
+    redirect_to '/profile'
+  end
+
   def create
     user = User.find(current_user.id)
     order = user.orders.create(order_params)
