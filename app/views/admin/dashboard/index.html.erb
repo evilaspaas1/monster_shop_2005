@@ -1,0 +1,45 @@
+<article>
+
+<%= content_tag :h1, "All user orders" %>
+
+<%= content_tag :h4, "Packaged Orders" %>
+
+<% @orders.each do |order| %>
+  <% if order.status == "packaged" %>
+  <section id="packaged-<%= order.id %>">
+    <%= content_tag :p, "Order id: #{order.id}" %>
+    <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
+    <%= content_tag :p, "Date Created: #{order.created_at}" %>
+  </section>
+    <% end %>
+<% end %>
+
+<%= content_tag :h4, "Pending Orders" %>
+
+<% @orders.each do |order| %>
+  <% if order.status == "pending" %>
+  <%= content_tag :p, "Order id: #{order.id}" %>
+  <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
+  <%= content_tag :p, "Date Created: #{order.created_at}" %>
+<% end %>
+<% end %>
+<%= content_tag :h4, "Shipped Orders" %>
+
+<% @orders.each do |order| %>
+  <% if order.status == "shipped" %>
+  <%= content_tag :p, "Order id: #{order.id}" %>
+  <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
+  <%= content_tag :p, "Date Created: #{order.created_at}" %>
+<% end %>
+<% end %>
+
+<%= content_tag :h4, "Cancelled Orders" %>
+
+<% @orders.each do |order| %>
+  <% if order.status == "cancelled" %>
+  <%= content_tag :p, "Order id: #{order.id}" %>
+  <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
+  <%= content_tag :p, "Date Created: #{order.created_at}" %>
+<% end %>
+<% end %>
+</article>
