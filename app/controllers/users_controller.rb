@@ -24,7 +24,7 @@ class UsersController<ApplicationController
   end
 
   def orders
-
+    @orders = Order.all
   end
 
   def update
