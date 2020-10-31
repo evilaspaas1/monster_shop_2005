@@ -13,4 +13,13 @@ class Order <ApplicationRecord
   def quantity
     items.count
   end
+
+  def cancel_order
+    item_orders.where(status: 'fulfilled').each do |order|
+      order.item.update(inventory: (order.quantity + order.item.inventory))
+    end
+
+    update(status: 'cancelled')
+    item_orders.where(order_id: id).update_all(status: 'unfulfilled')
+  end
 end
