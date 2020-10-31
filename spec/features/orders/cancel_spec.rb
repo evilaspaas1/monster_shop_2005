@@ -59,6 +59,7 @@ describe "user cancels order" do
     visit '/profile/orders'
 
     new_order = Order.last
+    new_order.item_orders.first.update(status: 'fulfilled')
 
     within(id="#Order-#{new_order.id}") do
       click_link "Cancel order"
@@ -67,7 +68,9 @@ describe "user cancels order" do
     expect(page).to have_content('Order is now cancelled')
 
     visit '/profile/orders'
-    
+
+    expect(new_order.item_orders.first.item.inventory).to eq(5)
+
     within(id="#Order-#{new_order.id}") do
       expect(page).to have_content('Current Status: cancelled')
     end
