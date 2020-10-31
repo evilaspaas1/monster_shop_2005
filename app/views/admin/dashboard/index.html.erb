@@ -6,11 +6,9 @@
 
 <% @orders.each do |order| %>
   <% if order.status == "packaged" %>
-  <section id="packaged-<%= order.id %>">
     <%= content_tag :p, "Order id: #{order.id}" %>
     <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
     <%= content_tag :p, "Date Created: #{order.created_at}" %>
-  </section>
     <% end %>
 <% end %>
 
