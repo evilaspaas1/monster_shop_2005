@@ -6,6 +6,8 @@
 # - Details of the order:
 
 # - the date when the order was created
+require "rails_helper"
+
 RSpec.describe("Order Creation") do
   describe "When I check out from my cart" do
     before(:each) do
@@ -61,10 +63,10 @@ RSpec.describe("Order Creation") do
       fill_in :zip, with: zip
 
       click_button "Create Order"
-      
+
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      visit "/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)
@@ -126,6 +128,31 @@ RSpec.describe("Order Creation") do
       expect(page).to have_button("Create Order")
     end
 
+    it "I am taken to my orders page after createing a new order" do
+      name = "Bert"
+      address = "123 Sesame St."
+      city = "NYC"
+      state = "New York"
+      zip = 10001
+
+      fill_in :name, with: name
+      fill_in :address, with: address
+      fill_in :city, with: city
+      fill_in :state, with: state
+      fill_in :zip, with: zip
+
+      click_button "Create Order"
+
+      new_order = Order.last
+
+      expect(new_order.status).to eq('pending')
+      expect(current_path).to eq("/profile/orders")
+      expect(page).to have_content('Order was created')
+
+      within('nav') do
+        expect(page).to have_content('Cart: 0')
+      end
+    end
 
   end
 end
