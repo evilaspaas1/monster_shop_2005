@@ -33,19 +33,26 @@ describe "As a registered user" do
         end
         click_link "Checkout"
 
-        
+        fill_in :name, with: @fred.name
+        fill_in :address, with: @fred.address
+        fill_in :city, with: @fred.city
+        fill_in :state, with: @fred.state
+        fill_in :zip, with: @fred.zip
+
+        click_button "Create Order"
       @order = Order.last
-      binding.pry
     end
     it "I see ever order w/ id, date order was made and updated, status, total quantity and grand total" do
       visit '/profile/orders'
-binding.pry
-      expect(page).to have_content(order.id)
-      expect(page).to have_content()
-      expect(page).to have_content()
-      expect(page).to have_content()
-      expect(page).to have_content()
-      expect(page).to have_content()
+
+      expect(page).to have_content(@order.id)
+      expect(page).to have_content(@order.created_at)
+      expect(page).to have_content(@order.updated_at)
+      expect(page).to have_content(@order.status)
+      expect(page).to have_content(@order.quantity)
+      expect(@order.quantity).to eq(2)
+      expect(page).to have_content(@order.grandtotal)
+      expect(@order.grandtotal).to eq(22)
     end
   end
 
