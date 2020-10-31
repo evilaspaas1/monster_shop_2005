@@ -1,0 +1,8 @@
+<%= @orders.each do |order| %>
+  <%= order.id %>
+  <%= order.created_at %>
+  <%= order.updated_at %>
+  <%= order.status %>
+  <%= order.quantity %>
+  <%= order.grandtotal %>
+<% end %>
