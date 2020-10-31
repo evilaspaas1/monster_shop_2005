@@ -13,4 +13,9 @@ class Order <ApplicationRecord
   def quantity
     items.count
   end
+
+  def cancel_order
+    update(status: 'cancelled')
+    item_orders.where(order_id: id).update_all(status: 'unfulfilled')
+  end
 end
