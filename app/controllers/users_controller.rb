@@ -23,6 +23,10 @@ class UsersController<ApplicationController
 
   end
 
+  def orders
+
+  end
+
   def update
     if current_user.update(user_params)
       flash[:update] = 'Data has been updated'
@@ -34,7 +38,7 @@ class UsersController<ApplicationController
   end
 
   def edit_password
-    
+
   end
 
   def update_password
