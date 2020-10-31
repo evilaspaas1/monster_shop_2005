@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rspec_pacman_formatter'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'orderly'
 end
 
 group :development do
