@@ -1,9 +1,12 @@
 <% @orders.each do |order| %>
-  <%= content_tag :p, "Order Id: #{order.id}" %>
-  <%= content_tag :p, "Current Status: #{order.status}" %>
-  <%= content_tag :p, "Total Items: #{order.quantity}" %>
-  <%= content_tag :p, "Total: $#{order.grandtotal}" %>
-  <%= link_to "View Order", "/profile/orders/#{order.id}" %>
-  <%= content_tag :p,order.created_at %>
-  <%= content_tag :p,order.updated_at %>
+  <section id="Order-<%= order.id %>">
+    <%= content_tag :p, "Order Id: #{order.id}" %>
+    <%= content_tag :p, "Current Status: #{order.status}" %>
+    <%= content_tag :p, "Total Items: #{order.quantity}" %>
+    <%= content_tag :p, "Total: $#{order.grandtotal}" %>
+    <%= link_to "View Order", "/profile/orders/#{order.id}" %>
+    <%= content_tag :p,order.created_at %>
+    <%= content_tag :p,order.updated_at %>
+    <%= link_to "Cancel order", "/profile/orders/#{order.id}", method: :patch %>
+  </section>
 <% end %>
