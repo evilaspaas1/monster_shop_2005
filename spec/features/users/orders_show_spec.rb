@@ -54,6 +54,13 @@ describe "As a registered user" do
       expect(page).to have_content(@order.grandtotal)
       expect(@order.grandtotal).to eq(22)
     end
-  end
+    it "Has a link for each order directing to that specific orders show page" do
+      visit '/profile/orders'
+      expect(page).to have_link("View Order")
 
+      click_link("View Order")
+      expect(current_path).to eq("/profile/orders/#{@order.id}")
+      save_and_open_page
+    end
+  end
 end
