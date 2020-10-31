@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "As a registered user" do
   describe "When I visit my profile page" do
-    before(:each) do 
+    before(:each) do
       @fred = User.create(name: "Fred Savage",
                    address: "666 Devil Ave",
                    city: "Mesatown",
@@ -11,7 +11,7 @@ RSpec.describe "As a registered user" do
                    email: "rando@gmail.com",
                    password: "test",
                    role: 0)
-                   
+
       visit root_path
 
       within "nav" do
@@ -31,6 +31,14 @@ RSpec.describe "As a registered user" do
       expect(page).to have_content("rando@gmail.com")
 
       expect(page).to have_link("Edit Profile Information")
+    end
+    it "Has a link to my orders page on my profile page" do
+      visit '/profile'
+      expect(page).to have_content("My Orders")
+
+      click_link "My Orders"
+      expect(current_path).to eq('/profile/orders')
+      save_and_open_page
     end
   end
 end
