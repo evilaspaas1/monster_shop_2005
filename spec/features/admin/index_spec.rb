@@ -41,11 +41,10 @@ describe "As an admin" do
       # page.body.should =~ /@order_2.*@order_1.*@order_3.*@order_4/ 
       # expect(page.body).to eq([@order2, @order1, @order3, @order4])
       # expect(page.body).to_not eq([@order4, @order3, @order2, @order1])
-      save_and_open_page
-      expect(@order2.id).to appear_before(@order1.id)
-      expect(@order1.id).to appear_before(@order3.id)
-      expect(@order3.id).to appear_before(@order4.id)
-      expect(@order4.id).to_not appear_before(@order2.id)
+      expect("#{@order2.id}").to appear_before("#{@order1.id}")
+      expect("#{@order1.id}").to appear_before("#{@order3.id}")
+      expect("#{@order3.id}").to appear_before("#{@order4.id}")
+      expect("#{@order4.id}").to_not appear_before("#{@order2.id}")
     end
   end
 end
