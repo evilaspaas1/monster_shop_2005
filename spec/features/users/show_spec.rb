@@ -38,7 +38,6 @@ RSpec.describe "As a registered user" do
 
       click_link "My Orders"
       expect(current_path).to eq('/profile/orders')
-      save_and_open_page
     end
   end
 end
