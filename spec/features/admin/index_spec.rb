@@ -17,9 +17,9 @@ describe "As an admin" do
 
 
       @order1 = @fred.orders.create!(name: @fred.name, address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "pending")
-      @order2 = @fred.orders.create!(name: @fred.name, address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "packaged")
-      @order3 = @fred.orders.create!(name: @fred.name, address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "shipped")
-      @order4 = @fred.orders.create!(name: @fred.name, address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "cancelled")
+      @order2 = @fred.orders.create!(name: "Brian", address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "packaged")
+      @order3 = @fred.orders.create!(name: "Tim", address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "shipped")
+      @order4 = @fred.orders.create!(name: "Alex", address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "cancelled")
       @tim = User.create(name: "Tim",
                          address: "Ya Hate To See It Dr.",
                          city: "Denver",
@@ -41,10 +41,36 @@ describe "As an admin" do
       # page.body.should =~ /@order_2.*@order_1.*@order_3.*@order_4/ 
       # expect(page.body).to eq([@order2, @order1, @order3, @order4])
       # expect(page.body).to_not eq([@order4, @order3, @order2, @order1])
+
+      # Ask Brian about above order tests
+
       expect("#{@order2.id}").to appear_before("#{@order1.id}")
       expect("#{@order1.id}").to appear_before("#{@order3.id}")
       expect("#{@order3.id}").to appear_before("#{@order4.id}")
       expect("#{@order4.id}").to_not appear_before("#{@order2.id}")
+    end
+
+    it "admin can 'ship' an order" do
+
+      within "#packaged-#{@order2.id}" do
+        click_button "Ship"
+      end
+
+      expect(current_path).to eq(admin_path)
+
+      # within "#shipped-#{@order2.id}" do
+      #   expect(@order2.status).to eq("shipped")
+      # end
+
+      # Ask Brian why tho?
+
+      expect(page).to_not have_css("#packaged-#{@order2.id}")
+
+      visit '/profile/orders'
+
+      within "#Order-#{@order2.id}" do
+        expect(page).to_not have_link("Cancel order")
+      end
     end
   end
 end
