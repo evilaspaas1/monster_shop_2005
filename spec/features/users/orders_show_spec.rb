@@ -61,5 +61,19 @@ describe "As a registered user" do
       click_link("View Order")
       expect(current_path).to eq("/profile/orders/#{@order.id}")
     end
+
+    it "When all items in an order have been 'fulfilled' by their merchants
+        The order status changes from 'pending' to 'packaged'" do
+
+      @order.item_orders.update_all(status: "fulfilled")
+      @order.all_items_fullfilled
+
+      visit "/profile/orders"
+
+      within "#Order-#{@order.id}" do
+        expect(page).to have_content("packaged")
+      end
+      expect(@order.status).to eq("packaged")
+    end
   end
 end

@@ -30,10 +30,10 @@ describe Order, type: :model do
                    email: "rando@gmail.com",
                    password: "test",
                    role: 0)
-      @order_1 = @fred.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      @order_1 = @fred.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: "pending")
 
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2, status: 'fulfilled')
-      @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
+      @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, status: 'fulfilled')
 
     end
     it 'grandtotal' do
@@ -51,6 +51,12 @@ describe Order, type: :model do
       expect(@order_1.item_orders.first.status).to eq('unfulfilled')
       expect(@order_1.item_orders.last.status).to eq('unfulfilled')
       expect(@order_1.status).to eq('cancelled')
+    end
+
+    it "#all_items_fullfilled" do
+      expect(@order_1.status).to eq("pending")
+      @order_1.all_items_fullfilled
+      expect(@order_1.status).to eq("packaged")
     end
   end
 end

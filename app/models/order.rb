@@ -22,4 +22,8 @@ class Order <ApplicationRecord
     update(status: 'cancelled')
     item_orders.where(order_id: id).update_all(status: 'unfulfilled')
   end
+
+  def all_items_fullfilled
+    update(status: "packaged") if item_orders.all? {|item_order| item_order.status == "fulfilled"}
+  end
 end
