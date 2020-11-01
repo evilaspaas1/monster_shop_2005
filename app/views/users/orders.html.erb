@@ -7,6 +7,8 @@
     <%= link_to "View Order", "/profile/orders/#{order.id}" %>
     <%= content_tag :p,order.created_at %>
     <%= content_tag :p,order.updated_at %>
-    <%= link_to "Cancel order", "/profile/orders/#{order.id}", method: :patch %>
+    <% if order.status != "shipped" %>
+     <%= link_to "Cancel order", "/profile/orders/#{order.id}", method: :patch %>
+    <% end %>
   </section>
 <% end %>
