@@ -38,11 +38,6 @@ describe "As an admin" do
       expect(page).to have_content("Order id: #{@order1.id}")
       expect(page).to have_content("Users Name: #{@order1.name}")
       expect(page).to have_content("Date Created: #{@order1.created_at}")
-      # page.body.should =~ /@order_2.*@order_1.*@order_3.*@order_4/ 
-      # expect(page.body).to eq([@order2, @order1, @order3, @order4])
-      # expect(page.body).to_not eq([@order4, @order3, @order2, @order1])
-
-      # Ask Brian about above order tests
 
       expect("#{@order2.id}").to appear_before("#{@order1.id}")
       expect("#{@order1.id}").to appear_before("#{@order3.id}")
@@ -51,18 +46,14 @@ describe "As an admin" do
     end
 
     it "admin can 'ship' an order" do
-
-      within "#packaged-#{@order2.id}" do
+      within "#order-#{@order2.id}" do
         click_button "Ship"
       end
 
       expect(current_path).to eq(admin_path)
 
-      # within "#shipped-#{@order2.id}" do
-      #   expect(@order2.status).to eq("shipped")
-      # end
-
-      # Ask Brian why tho?
+      @order2.reload
+      expect(@order2.status).to eq("shipped")
 
       expect(page).to_not have_css("#packaged-#{@order2.id}")
 

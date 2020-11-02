@@ -1,0 +1,11 @@
+
+<% if orders != nil %>
+  <% orders.each do |order| %>
+    <section id="order-<%= order.id %>">
+      <%= content_tag :p, "Order id: #{order.id}" %>
+      <p>Users Name: <%= link_to "#{order.name}", "/admin/users/:user_id" %></p>
+      <%= content_tag :p, "Date Created: #{order.created_at}" %>
+      <%= button_to "Ship", "/admin/#{order.id}", method: :patch %>
+    </section>
+  <% end %>
+<% end %>
