@@ -35,13 +35,32 @@ describe 'merchant show page', type: :feature do
         fill_in "Price", with: 2
         fill_in "Inventory", with: 50
 
+        save_and_open_page
         click_on "Create Item"
 
         @bell = Item.last
         expect(current_path).to eq('/merchant/items')
         expect(page).to have_css("#item-#{@bell.id}")
         expect(page).to have_content("#{@bell.name} is Saved")
-        save_and_open_page
+      end
+      it "items need all information above (except image) and wont be created until all information is filled in and correct" do
+
+        visit '/merchant/items'
+
+        expect(page).to have_link('New Item')
+        click_link 'New Item'
+
+        fill_in "Name", with: "Bell"
+        fill_in "Description", with: ""
+        fill_in "Image", with: ""
+        fill_in "Price", with: "two"
+        fill_in "Inventory", with: 50
+
+        click_on "Create Item"
+
+        expect(page).to have_field("Image", placeholder: "Put image here")
+        expect(current_path).to eq('/merchant/items')
+        expect(page).to have_content("Description can't be blank and Price is not a number")
       end
     end
   end
