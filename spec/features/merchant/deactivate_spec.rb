@@ -58,7 +58,7 @@ describe 'merchant show page', type: :feature do
         within "#item-#{@tire.id}" do
           click_button "Disable"
         end
-save_and_open_page
+
         @tire.reload
         within "#item-#{@tire.id}" do
           expect(page).to have_content("Active?: false")
