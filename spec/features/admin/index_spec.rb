@@ -15,7 +15,6 @@ describe "As an admin" do
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 25)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
-
       @order1 = @fred.orders.create!(name: @fred.name, address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "pending")
       @order2 = @fred.orders.create!(name: "Brian", address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "packaged")
       @order3 = @fred.orders.create!(name: "Tim", address: @fred.address, city: @fred.city, state: @fred.state, zip: @fred.zip, status: "shipped")
@@ -28,11 +27,12 @@ describe "As an admin" do
                          email: "tim@gmail.com",
                          password: "test",
                          role: 2)
-                         visit "/login"
+                         
+      visit "/login"
 
-       fill_in :email, with: @tim.email
-       fill_in :password, with: @tim.password
-       click_button "Log In"
+      fill_in :email, with: @tim.email
+      fill_in :password, with: @tim.password
+      click_button "Log In"
     end
     it "I see all orders in the system with user who place the order, the order id, and date created" do
       expect(page).to have_content("Order id: #{@order1.id}")
