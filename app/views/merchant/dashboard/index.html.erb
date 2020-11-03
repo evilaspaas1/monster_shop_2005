@@ -7,6 +7,10 @@
     <%= image_tag item.image, width: '50', height: '50'  %>
     <p>Active?: <%= item.active? %></p>
     <p>Inventory: <%= item.inventory %></p>
-    <%= button_to "Disable", "/merchant/items/#{item.id}/disable", method: :patch %>
+    <% if item.active? %>
+      <%= button_to "Disable", "/merchant/items/#{item.id}/disable", method: :patch %>
+    <% else %>
+      <%= button_to "Activate", "/merchant/items/#{item.id}/activate", method: :patch %>
+    <% end %>
   </section>
 <% end %>
