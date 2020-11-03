@@ -32,22 +32,30 @@ describe Order, type: :model do
                    role: 0)
       @order_1 = @fred.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: "pending")
 
-      @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2, status: 'fulfilled')
+      @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 5, status: 'fulfilled')
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, status: 'fulfilled')
-
     end
+
     it 'grandtotal' do
-      expect(@order_1.grandtotal).to eq(230)
+      expect(@order_1.grandtotal).to eq(530)
     end
 
     it "item quantity" do
       expect(@order_1.quantity).to eq(2)
     end
 
+    it 'grandtotal by merchant' do
+      expect(@order_1.grandtotal_by_merchant(@meg.id)).to eq(500)
+    end
+
+    it "item quantity by merchant" do
+      expect(@order_1.quantity_by_merchant(@meg.id)).to eq(5)
+    end
+
     it "cancel order" do
       @order_1.cancel_order
 
-      expect(@order_1.item_orders.first.item.inventory).to eq(14)
+      expect(@order_1.item_orders.first.item.inventory).to eq(17)
       expect(@order_1.item_orders.first.status).to eq('unfulfilled')
       expect(@order_1.item_orders.last.status).to eq('unfulfilled')
       expect(@order_1.status).to eq('cancelled')

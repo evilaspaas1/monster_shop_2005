@@ -84,7 +84,9 @@ end
 
 describe 'As a merchant employee' do
   it "I see all the same links as a regular user plus a link to my merchant dashboard" do
-    fred = User.create(name: "Fred Savage",
+    bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+
+    fred = bike_shop.users.create(name: "Fred Savage",
                        address: "666 Devil Ave",
                        city: "Mesatown",
                        state: "AZ",
