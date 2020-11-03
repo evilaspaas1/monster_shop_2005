@@ -22,6 +22,18 @@ describe 'merchant show page', type: :feature do
         fill_in :password, with: @roz.password
         click_button "Log In"
       end
+      it "Can delete the item" do
+
+        visit '/merchant/items'
+
+        within "#item-#{@tire.id}" do
+          expect(page).to have_button("Delete")
+          click_button "Delete"
+        end
+
+        expect(current_path).to eq('/merchant/items')
+        expect(page).to_not have_css("#item-#{@tire.id}")
+      end
     end
   end
-end 
+end
