@@ -13,7 +13,18 @@ class Admin::DashboardController < Admin::BaseController
 
   end
 
+  def merchant_index
+    @merchants = Merchant.all
+  end
+
   def merchant
     @merchant = Merchant.find(params[:merchant_id])
-  end 
+  end
+
+  def disable
+    merchant = Merchant.find(params[:merchant_id])
+    merchant.update(active_status: false)
+    flash[:notice] = "Merchant #{merchant.name} is now Disabled"
+    redirect_to '/admin/merchants'
+  end
 end
