@@ -41,12 +41,16 @@ RSpec.describe 'merchant show page', type: :feature do
       end 
       it 'Any pending orders are listed with info' do
         within "#order-#{@order_1.id}" do
-          # save_and_open_page
           expect(page).to have_link("#{@order_1.id}")
           expect(page).to have_content("Date Created: #{@order_1.created_at}")
           expect(page).to have_content("Order Quantity: #{@order_1.quantity_by_merchant(@bike_shop.id)}")
           expect(page).to have_content("Total Price: #{@order_1.grandtotal_by_merchant(@bike_shop.id)}")
         end
+      end 
+      it 'I see a link to view my own items' do
+        expect(page).to have_link("View My Items")
+        click_link("View My Items")
+        expect(current_path).to eq("/merchant/items")
       end 
     end 
   end
