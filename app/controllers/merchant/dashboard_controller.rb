@@ -8,13 +8,15 @@ class Merchant::DashboardController < Merchant::BaseController
   end
 
   def new
-    @item = Item.new
+    @merchant = current_user.merchant
+    @item = @merchant.items.new
   end
 
   def create
     @merchant = current_user.merchant
-    binding.pry
-    test = @merchant.items.create(item_params)
+    item = @merchant.items.create(item_params)
+    redirect_to '/merchant/items'
+    flash[:notice] = "#{item.name} is Saved"
   end
 
   def disable
@@ -39,6 +41,6 @@ class Merchant::DashboardController < Merchant::BaseController
 
   private
   def item_params
-  params.require(:items).permit(:name, :description, :price, :image, :inventory)
+  params.require(:item).permit(:name, :description, :price, :image, :inventory)
   end
 end

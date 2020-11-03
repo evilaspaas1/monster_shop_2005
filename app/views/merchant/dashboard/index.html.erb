@@ -12,8 +12,8 @@
     <% else %>
       <%= button_to "Activate", "/merchant/items/#{item.id}/activate", method: :patch %>
     <% end %>
+    <br>
     <%= button_to "Delete", "/merchant/items/#{item.id}/delete", method: :delete %>
   </section>
 <% end %>
-
 <%= link_to "New Item", '/merchant/items/new' %>

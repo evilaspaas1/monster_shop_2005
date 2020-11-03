@@ -28,7 +28,7 @@ describe 'merchant show page', type: :feature do
 
         expect(page).to have_link('New Item')
         click_link 'New Item'
-save_and_open_page
+
         fill_in "Name", with: "Bell"
         fill_in "Description", with: "Ding Ding"
         fill_in "Image", with: ""
@@ -36,11 +36,12 @@ save_and_open_page
         fill_in "Inventory", with: 50
 
         click_on "Create Item"
-binding.pry
+
         @bell = Item.last
         expect(current_path).to eq('/merchant/items')
         expect(page).to have_css("#item-#{@bell.id}")
         expect(page).to have_content("#{@bell.name} is Saved")
+        save_and_open_page
       end
     end
   end
