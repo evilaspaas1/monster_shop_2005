@@ -3,7 +3,14 @@ class Merchant::DashboardController < Merchant::BaseController
     @merchant = current_user.merchant
   end
 
-  def index 
+  def index
+    @merchant = current_user.merchant
+  end
 
-  end 
+  def disable
+    item = Item.find(params[:item_id])
+    item.update(active?: false)
+    flash[:notice] = "#{item.name} is no longer for Sale"
+    redirect_to '/merchant/items'
+  end
 end
