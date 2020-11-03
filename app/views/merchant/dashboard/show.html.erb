@@ -1,3 +1,13 @@
 <h1><%= @merchant.name %></h1>
 
-<p>Adress: <%= @merchant.address %>, <%= @merchant.city %>, <%= @merchant.state %>, <%= @merchant.zip %></p>
+<p>Address: <%= @merchant.address %>, <%= @merchant.city %>, <%= @merchant.state %>, <%= @merchant.zip %></p>
+
+<% @merchant.pending_orders.each do |order| %>
+  <h5>Pending Order:</h5>
+  <section id="order-<%= order.id %>">
+    <p>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></p>
+    <p>Date Created: <%= order.created_at %></p>
+    <p>Order Quantity: <%= order.quantity_by_merchant(@merchant.id) %></p>
+    <p>Total Price: <%= order.grandtotal_by_merchant(@merchant.id) %></p>
+  </section>
+<% end %>
