@@ -42,5 +42,23 @@ describe "As an admin" do
       end
       expect(page).to have_content("Merchant #{@mike.name} is now Disabled")
     end
+    it "When I disable a Merchant, all their items have an active status of false" do
+
+      visit '/admin/merchants'
+
+      within "#merchant-#{@mike.id}" do
+        expect(page).to have_content(@mike.name)
+        expect(@mike.active_status).to eq(true)
+        expect(page).to have_button("Disable")
+      end
+
+      click_button "Disable"
+
+      @paper.reload
+      @pencil.reload
+      expect(@paper.active?).to eq(false)
+      expect(@pencil.active?).to eq(false)
+
+    end
   end
 end
