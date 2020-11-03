@@ -14,9 +14,14 @@ class Merchant::DashboardController < Merchant::BaseController
 
   def create
     @merchant = current_user.merchant
-    item = @merchant.items.create(item_params)
-    redirect_to '/merchant/items'
-    flash[:notice] = "#{item.name} is Saved"
+    @item = @merchant.items.new(item_params)
+    if @item.save
+      redirect_to '/merchant/items'
+      flash[:notice] = "#{@item.name} is Saved"
+    else
+      flash[:invalid_information] = @item.errors.full_messages.uniq.to_sentence
+      render :new
+    end
   end
 
   def disable
