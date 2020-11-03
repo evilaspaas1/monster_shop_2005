@@ -27,7 +27,7 @@ describe "As an admin" do
                          email: "tim@gmail.com",
                          password: "test",
                          role: 2)
-                         
+
       visit "/login"
 
       fill_in :email, with: @tim.email
@@ -35,6 +35,7 @@ describe "As an admin" do
       click_button "Log In"
     end
     it "I see all orders in the system with user who place the order, the order id, and date created" do
+    
       expect(page).to have_content("Order id: #{@order1.id}")
       expect(page).to have_content("Users Name: #{@order1.name}")
       expect(page).to have_content("Date Created: #{@order1.created_at}")
