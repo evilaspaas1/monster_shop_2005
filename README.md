@@ -578,7 +578,7 @@ I see all information about the order, including the following information:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 30, User cancels an order
 
@@ -595,7 +595,7 @@ When I click the cancel button for an order, the following happens:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 31, All Merchants fulfill items on an order
 
@@ -604,7 +604,7 @@ The order status changes from "pending" to "packaged"
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 32, Admin can see all orders
 
@@ -626,7 +626,7 @@ Orders are sorted by "status" in this order:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 33, Admin can "ship" an order
 
@@ -647,7 +647,7 @@ This is the landing page when a merchant logs in. Here, they will see their cont
 Admin users will see more information on the "/admin/merchants" route that all users see. For example, on this page, an admin user can navigate to each merchant's dashboard under a route like "/admin/merchants/7". This will allow the admin to perform every action that the merchant themselves can perform. Fulfilling merchant items will be an extension in User Stories 61 & 62
 
 ```
-[ ] done
+[x] done
 
 User Story 34, Merchant Dashboard Show Page
 
@@ -657,7 +657,7 @@ I see the name and full address of the merchant I work for
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 35, Merchant Dashboard displays Orders
 
@@ -673,7 +673,7 @@ Each order listed includes the following information:
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 36, Merchant's Items index page
 
@@ -685,7 +685,7 @@ My URI route should be "/merchant/items"
 ```
 
 ```
-[ ] done
+[x] done
 
 User Story 37, Admin can see a merchant's dashboard
 
