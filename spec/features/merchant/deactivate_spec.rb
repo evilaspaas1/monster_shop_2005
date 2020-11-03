@@ -51,7 +51,23 @@ describe 'merchant show page', type: :feature do
           expect(page).to have_button("Disable")
         end
       end
-      
+      it "Can disable and Item by pressing the 'Diable' button" do
+
+        visit '/merchant/items'
+
+        within "#item-#{@tire.id}" do
+          click_button "Disable"
+        end
+save_and_open_page
+        @tire.reload
+        within "#item-#{@tire.id}" do
+          expect(page).to have_content("Active?: false")
+        end
+        expect(current_path).to eq('/merchant/items')
+        expect(@tire.active?).to eq(false)
+        expect(@pull_toy.active?).to eq(true)
+        expect(page).to have_content("#{@tire.name} is no longer for Sale")
+      end
     end
   end
 end
