@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :merchant do
     get "/", to: 'dashboard#show'
     get "/items", to: 'dashboard#index'
+    get '/items/new', to: 'dashboard#new'
+    post '/items', to: 'dashboard#create'
     patch '/items/:item_id/disable', to: 'dashboard#disable'
     patch '/items/:item_id/activate', to: 'dashboard#activate'
     delete '/items/:item_id/delete', to: 'dashboard#destroy'

@@ -7,6 +7,16 @@ class Merchant::DashboardController < Merchant::BaseController
     @merchant = current_user.merchant
   end
 
+  def new
+    @item = Item.new
+  end
+
+  def create
+    @merchant = current_user.merchant
+    binding.pry
+    test = @merchant.items.create(item_params)
+  end
+
   def disable
     item = Item.find(params[:item_id])
     item.update(active?: false)
@@ -25,5 +35,10 @@ class Merchant::DashboardController < Merchant::BaseController
     item = Item.find(params[:item_id])
     item.delete
     redirect_to '/merchant/items'
+  end
+
+  private
+  def item_params
+  params.require(:items).permit(:name, :description, :price, :image, :inventory)
   end
 end
