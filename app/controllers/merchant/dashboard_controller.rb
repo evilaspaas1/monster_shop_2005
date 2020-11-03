@@ -20,4 +20,10 @@ class Merchant::DashboardController < Merchant::BaseController
     flash[:notice] = "#{item.name} is Available for Sale"
     redirect_to '/merchant/items'
   end
+
+  def destroy
+    item = Item.find(params[:item_id])
+    item.delete
+    redirect_to '/merchant/items'
+  end
 end
