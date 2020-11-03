@@ -22,23 +22,6 @@ describe 'merchant show page', type: :feature do
         fill_in :password, with: @roz.password
         click_button "Log In"
       end
-      it "If an item is disabled, it will have a button to enable that item" do
-        visit '/merchant/items'
-
-        within "#item-#{@tire.id}" do
-          click_button "Disable"
-        end
-
-        within "#item-#{@tire.id}" do
-          expect(page).to have_button("Activate")
-          click_button("Activate")
-        end
-
-        within "#item-#{@tire.id}" do
-          expect(page).to have_content("Active?: true")
-        end
-        expect(page).to have_content("#{@tire.name} is Available for Sale")
-      end
     end
   end
-end
+end 
