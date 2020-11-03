@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "/", to: 'dashboard#show'
     get "/items", to: 'dashboard#index'
     patch '/items/:item_id/disable', to: 'dashboard#disable'
+    patch '/items/:item_id/activate', to: 'dashboard#activate'
   end
 
   namespace :admin do
