@@ -12,4 +12,8 @@ class Admin::DashboardController < Admin::BaseController
   def users_index
 
   end
+
+  def merchant
+    @merchant = Merchant.find(params[:merchant_id])
+  end 
 end
