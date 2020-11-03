@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :merchant do
     get "/", to: 'dashboard#show'
     get "/items", to: 'dashboard#index'
+    patch '/items/:item_id/disable', to: 'dashboard#disable'
   end
 
   namespace :admin do
