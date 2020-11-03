@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get '/users', to: 'dashboard#users_index'
     patch '/:order_id', to: 'dashboard#ship'
+    get '/merchants/:merchant_id', to: 'dashboard#merchant'
   end
 
   get "/merchants", to: "merchants#index"
