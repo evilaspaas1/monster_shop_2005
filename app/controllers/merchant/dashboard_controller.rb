@@ -24,6 +24,21 @@ class Merchant::DashboardController < Merchant::BaseController
     end
   end
 
+  def edit
+    @merchant = current_user.merchant
+    @item = @merchant.items.find(params[:item_id])
+  end
+
+  def update
+    @item = Item.find(params[:item_id])
+    if @item.update(item_params)
+      redirect_to '/merchant/items'
+    else
+      flash[:invalid_information] = @item.errors.full_messages.uniq.to_sentence
+      render :edit
+    end
+  end
+
   def disable
     item = Item.find(params[:item_id])
     item.update(active?: false)
