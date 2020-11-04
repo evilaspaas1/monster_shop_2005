@@ -14,6 +14,7 @@
     <% end %>
     <br>
     <%= button_to "Delete", "/merchant/items/#{item.id}/delete", method: :delete %>
+    <%= link_to "Edit Item", "/merchant/items/#{item.id}/edit" %>
   </section>
 <% end %>
 <%= link_to "New Item", '/merchant/items/new' %>
