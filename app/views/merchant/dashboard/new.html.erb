@@ -1,0 +1,18 @@
+<%= form_with model: [:merchant, @item], class: "add_item" do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image, placeholder: "Put image here" %>
+
+  <%= f.label :inventory %>
+  <%= f.number_field :inventory %>
+
+  <%= f.submit %>
+<% end  %>

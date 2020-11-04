@@ -1,0 +1,18 @@
+<%= form_with url: "/merchant/items/#{@item.id}/update", model: [:merchant, @item], class: "edit_item", method: :patch do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image, placeholder: "Put image here" %>
+
+  <%= f.label :inventory %>
+  <%= f.number_field :inventory %>
+
+  <%= f.submit %>
+<% end  %>
