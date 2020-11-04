@@ -61,7 +61,6 @@ describe 'As a merchant employee' do
       end
 
       expect(page).to_not have_css("#item-#{@dog_bone.id}")
-      save_and_open_page
     end
   end
 end
