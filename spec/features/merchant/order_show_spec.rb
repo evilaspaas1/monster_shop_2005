@@ -21,7 +21,7 @@ describe 'As a merchant employee' do
     @order_2 = @roz.orders.create!(name: 'Brian', address: '123 Zanti St', city: 'Denver', state: 'CO', zip: 80204, status: "pending")
 
     @item_order_1 = @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
-    @item_order_2 = @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
+    @item_order_2 = @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, status: 'fulfilled')
     @order_1.item_orders.create!(item: @dog_bone, price: @dog_bone.price, quantity: 2)
     @order_2.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 2)
 
@@ -61,6 +61,27 @@ describe 'As a merchant employee' do
       end
 
       expect(page).to_not have_css("#item-#{@dog_bone.id}")
+    end
+
+    it "If the user's desired quantity is equal to or less than my current inventory quantity for that item
+    And I have not already 'fulfilled' that item" do
+
+      visit "/merchant/orders/#{@order_1.id}"
+      expect(@tire.inventory).to eq(12)
+
+      within id="#item-#{@item_order_1.item_id}" do
+        click_button 'fulfill'
+      end
+
+      expect(page).to have_content("Item has been fulfilled")
+
+      within id="#item-#{@item_order_2.item_id}" do
+        expect(page).to_not have_button('fulfill')
+        expect(page).to have_content("Item has already been fulfilled")
+      end
+
+      @tire.reload
+      expect(@tire.inventory).to eq(10)
     end
   end
 end
