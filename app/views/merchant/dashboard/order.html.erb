@@ -1,0 +1,11 @@
+<h3>Name: <%= @order.name %></h3>
+<h3><%= @order.address %></h3>
+
+<% @order.merchant_items(current_user.merchant.id).each do |item_order|%>
+<section id="item-<%= item_order.item_id %>">
+  Item name: <%= link_to "#{item_order.item.name}", "/items/#{item_order.item_id}" %><br>
+  <%= image_tag item_order.item.image, height: '50', width: '50' %><br>
+  Price: <%= item_order.price %><br>
+  Quantity: <%= item_order.quantity %><br>
+</section><br>
+<% end %>
