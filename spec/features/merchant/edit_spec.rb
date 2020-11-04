@@ -31,6 +31,7 @@ describe 'merchant show page', type: :feature do
         end
         expect(current_path).to eq("/merchant/items/#{@pull_toy.id}/edit")
 
+#left fields commented out for viewers to read object
         #fill_in "Name", with: ""
         fill_in "Description", with: "Okay, pull toy"
         #fill_in "Image", with: ""
@@ -54,6 +55,7 @@ describe 'merchant show page', type: :feature do
         end
         expect(current_path).to eq("/merchant/items/#{@pull_toy.id}/edit")
 
+#left fields commented out for viewers to read object
         fill_in "Name", with: ""
         #fill_in "Description", with: "Great pull toy!"
         #fill_in "Image", with: ""
