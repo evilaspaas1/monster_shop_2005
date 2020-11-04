@@ -59,6 +59,10 @@ class Merchant::DashboardController < Merchant::BaseController
     redirect_to '/merchant/items'
   end
 
+  def order
+    @order = Order.find(params[:order_id])
+  end
+
   private
   def item_params
   params.require(:item).permit(:name, :description, :price, :image, :inventory)
