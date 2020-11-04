@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/items/:item_id/edit', to: 'dashboard#edit'
     get '/orders/:order_id', to: 'dashboard#order'
 
+    patch 'orders/:order_id', to: 'dashboard#fulfill_order'
     patch '/items/:item_id/update', to: 'dashboard#update'
     patch '/items/:item_id/disable', to: 'dashboard#disable'
     patch '/items/:item_id/activate', to: 'dashboard#activate'

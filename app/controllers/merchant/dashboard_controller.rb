@@ -63,6 +63,13 @@ class Merchant::DashboardController < Merchant::BaseController
     @order = Order.find(params[:order_id])
   end
 
+  def fulfill_order
+    item_order = ItemOrder.find(params[:order_id])
+    item_order.fulfill
+    flash[:success] = "Item has been fulfilled"
+    redirect_to "/merchant/orders/#{item_order.order.id}"
+  end
+
   private
   def item_params
   params.require(:item).permit(:name, :description, :price, :image, :inventory)
