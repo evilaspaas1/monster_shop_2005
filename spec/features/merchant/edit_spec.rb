@@ -61,7 +61,7 @@ describe 'merchant show page', type: :feature do
         fill_in "Inventory", with: "Alot"
 
         click_on "Update Item"
-save_and_open_page
+
         expect(current_path).to eq("/merchant/items/#{@pull_toy.id}/update")
         expect(page).to have_content("Name can't be blank and Inventory is not a number")
         expect(@pull_toy.description).to eq("Great pull toy!")

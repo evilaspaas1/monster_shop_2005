@@ -35,7 +35,6 @@ describe 'merchant show page', type: :feature do
         fill_in "Price", with: 2
         fill_in "Inventory", with: 50
 
-        save_and_open_page
         click_on "Create Item"
 
         @bell = Item.last
