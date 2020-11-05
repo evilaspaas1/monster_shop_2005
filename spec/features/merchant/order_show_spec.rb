@@ -83,5 +83,15 @@ describe 'As a merchant employee' do
       @tire.reload
       expect(@tire.inventory).to eq(10)
     end
+
+    it "I  do not see a 'fulfill' button or link
+    Instead I see a notice next to the item indicating I cannot fulfill this item" do
+    @tire.update(inventory: 1)
+    visit "/merchant/orders/#{@order_1.id}"
+    save_and_open_page
+      within id="#item-#{@item_order_1.item_id}" do
+        expect(page).to have_content('Item cannot be fulfilled')
+      end
+    end
   end
 end
