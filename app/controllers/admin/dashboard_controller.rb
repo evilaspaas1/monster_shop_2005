@@ -10,7 +10,11 @@ class Admin::DashboardController < Admin::BaseController
   end
 
   def users_index
+    @users = User.all
+  end
 
+  def users_show
+    @account = User.find(params[:user_id])
   end
 
   def merchant_index
