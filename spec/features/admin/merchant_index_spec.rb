@@ -24,7 +24,6 @@ describe "As an admin" do
     end
     it "I see some merchant info and a enable or disable button" do
       visit "/admin/merchants"
-      save_and_open_page
 
       within "#merchant-#{@bike_shop.id}" do
         expect(page).to have_link(@bike_shop.name)
