@@ -9,10 +9,10 @@
   Quantity: <%= item_order.quantity %><br>
   <% if item_order.status != 'fulfilled' && item_order.item.inventory >= item_order.quantity %>
     <%= button_to "fulfill", "/merchant/orders/#{item_order.id}", method: :patch %>
-    <% elsif item_order.item.inventory < item_order.quantity  %>
-      <p>Item cannot be fulfilled</p>
-    <% else %>
-      <p>Item has already been fulfilled</p>
+  <% elsif item_order.item.inventory < item_order.quantity  %>
+    <p>Item cannot be fulfilled</p>
+  <% else %>
+    <p>Item has already been fulfilled</p>
   <% end %>
 </section><br>
 <% end %>
