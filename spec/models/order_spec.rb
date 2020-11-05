@@ -33,7 +33,7 @@ describe Order, type: :model do
       @order_1 = @fred.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: "pending")
 
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 5, status: 'fulfilled')
-      @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, status: 'fulfilled')
+      @item_order_1 = @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, status: 'fulfilled')
     end
 
     it 'grandtotal' do
@@ -65,6 +65,10 @@ describe Order, type: :model do
       expect(@order_1.status).to eq("pending")
       @order_1.all_items_fullfilled
       expect(@order_1.status).to eq("packaged")
+    end
+
+    it "merchant_items returns item_orders for specific merchent" do
+      expect(@order_1.merchant_items(@brian.id)).to eq([@item_order_1])
     end
   end
 end

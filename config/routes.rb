@@ -9,8 +9,10 @@ Rails.application.routes.draw do
     get '/items/new', to: 'dashboard#new'
     post '/items', to: 'dashboard#create'
     get '/items/:item_id/edit', to: 'dashboard#edit'
-    patch '/items/:item_id/update', to: 'dashboard#update'
+    get '/orders/:order_id', to: 'dashboard#order'
 
+    patch 'orders/:order_id', to: 'dashboard#fulfill_order'
+    patch '/items/:item_id/update', to: 'dashboard#update'
     patch '/items/:item_id/disable', to: 'dashboard#disable'
     patch '/items/:item_id/activate', to: 'dashboard#activate'
     delete '/items/:item_id/delete', to: 'dashboard#destroy'

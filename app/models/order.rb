@@ -34,4 +34,8 @@ class Order <ApplicationRecord
   def all_items_fullfilled
     update(status: "packaged") if item_orders.all? {|item_order| item_order.status == "fulfilled"}
   end
+
+  def merchant_items(merchant_id)
+    item_orders.joins(:item).where(items: {merchant_id: merchant_id})
+  end
 end
