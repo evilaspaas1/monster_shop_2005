@@ -1,0 +1,7 @@
+<%= content_tag :h1, "Welcome #{current_user.name}" %>
+
+<% @users.each do |user| %>
+<section id="user-<%= user.id %>">
+  <p>Users name: <%= link_to user.name, "/admin/users/#{user.id}" %> Date Registered: <%= user.created_at %> Type of User: <%= user.role %></p><br><br>
+</section>
+<% end %>
