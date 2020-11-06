@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     post '/items', to: 'dashboard#create'
     get '/items/:item_id/edit', to: 'dashboard#edit'
     get '/orders/:order_id', to: 'dashboard#order'
-
     patch 'orders/:order_id', to: 'dashboard#fulfill_order'
     patch '/items/:item_id/update', to: 'dashboard#update'
     patch '/items/:item_id/disable', to: 'dashboard#disable'
@@ -29,29 +28,20 @@ Rails.application.routes.draw do
     get '/merchants/:merchant_id', to: 'dashboard#merchant'
   end
 
-  get "/merchants", to: "merchants#index"
-  get "/merchants/new", to: "merchants#new"
-  get "/merchants/:id", to: "merchants#show"
-  post "/merchants", to: "merchants#create"
-  get "/merchants/:id/edit", to: "merchants#edit"
-  patch "/merchants/:id", to: "merchants#update"
-  delete "/merchants/:id", to: "merchants#destroy"
+  resources :merchants do
+    resources :items, only: [:index, :new, :create]
+  end
 
-  get "/items", to: "items#index"
-  get "/items/:id", to: "items#show"
-  get "/items/:id/edit", to: "items#edit"
-  patch "/items/:id", to: "items#update"
-  get "/merchants/:merchant_id/items", to: "items#index"
-  get "/merchants/:merchant_id/items/new", to: "items#new"
-  post "/merchants/:merchant_id/items", to: "items#create"
-  delete "/items/:id", to: "items#destroy"
+  resources :items, except: [:new, :create]
 
+  # Tried to make this work. the two routes under here are what we tried to generate
+  # scope :items do
+  #   resources :reviews, only: [:new, :create]
+  # end
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"
 
-  get "/reviews/:id/edit", to: "reviews#edit"
-  patch "/reviews/:id", to: "reviews#update"
-  delete "/reviews/:id", to: "reviews#destroy"
+  resources :reviews, only: [:edit, :update, :destroy]
 
   post "/cart/:item_id", to: "cart#add_item"
   patch "/cart/:item_id/add", to: 'cart#add_quantity'
@@ -60,11 +50,9 @@ Rails.application.routes.draw do
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
 
-  get "/orders/new", to: "orders#new"
-  post "/orders", to: "orders#create"
-  get "/orders/:id", to: "orders#show"
+  resources :orders, only: [:new, :create, :show]
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:create]
 
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
@@ -74,7 +62,7 @@ Rails.application.routes.draw do
   patch "/profile/update_password", to: 'users#update_password'
   get '/profile/orders', to: 'users#orders'
   get '/profile/orders/:id', to: 'orders#show'
-  patch 'profile/orders/:id', to: "orders#cancel"
+  patch '/profile/orders/:id', to: "orders#cancel"
 
   get "/login", to: 'sessions#new'
   post "/login", to: 'sessions#create'
